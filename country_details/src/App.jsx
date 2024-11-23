@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import './App.css'
 import Country from './components/Country';
@@ -13,7 +12,7 @@ function App() {
     const res= await fetch(url);
     const data= await res.json();
     setCountries(data.data);
-    console.log(data.data);
+    console.log(data.data[0]);
   }
   useEffect(()=>{
     country()
@@ -27,9 +26,10 @@ function App() {
         {/* <h1>{Countries.length}</h1> */}
         <ul>
           {
-          // eslint-disable-next-line react/jsx-key
-          Countries.map(country=> <Country name={country.name} unicodeFlag={country.unicodeFlag} currency={country.currency} flag={country.flag} dialCode={country.dialCode} capital={country.capital}>  </Country>) 
-          }
+         
+          Countries.map(country => (
+            <Country key={country.name} country={country} />
+          ))}
         </ul>
       </div>
       
